@@ -44,6 +44,7 @@ db.sqlite3-journal
 /media/
 
 # Environment variables
+ecommerce_api/.env
 .env
 .env.local
 .env.*.local
