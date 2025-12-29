@@ -58,7 +58,7 @@ class ChangePasswordView(APIView):
     """Api endpoint for changing password"""
     permission_classes = [permissions.IsAuthenticated]
     
-    def Post(self, request):
+    def post(self, request):
         serializer = ChangePasswordSerializer(data=request.data)
         
         if serializer.is_valid():
@@ -85,7 +85,7 @@ class LogoutView(APIView):
     """API endpoint for user logout"""
     permission_classes = [permissions.IsAuthenticated]
     
-    def Post(self, request):
+    def post(self, request):
         try:
             refresh_token = request.data.get('refresh_token')
             if not refresh_token:

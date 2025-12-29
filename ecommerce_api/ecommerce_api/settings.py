@@ -37,6 +37,7 @@ ALLOWED_HOSTS = config(
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework_simplejwt.token_blacklist',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -189,8 +190,8 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # Redis Configuration
-REDIS_HOST = config('REDIS_HOST', default='localhost'),
-REDIS_PORT = config('REDIS_PORT', default='6379'),
+REDIS_HOST = config('REDIS_HOST', default='localhost')
+REDIS_PORT = config('REDIS_PORT', default='6379')
 REDIS_DB = config('REDIS_DB', default=0)
 
 

@@ -23,7 +23,7 @@ urlpatterns = [
     # Product endpoints
     path('', ProductListCreateView.as_view(), name='product_list'),
     path('featured/', FeaturedProductsView.as_view(), name='featured_products'),
-    path('serach/', ProductSearchView.as_view(), name='product_serach'),
+    path('search/', ProductSearchView.as_view(), name='product_search'),
     path('<slug:slug>/', ProductDetailView.as_view(), name='product_detail'),
     
     # Product image upload

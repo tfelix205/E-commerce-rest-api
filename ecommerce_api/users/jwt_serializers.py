@@ -16,7 +16,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         
         return token
     
-    def Validate(self, attrs):
+    def validate(self, attrs):
         data = super().validate(attrs)
         # Add extra response
         data['user'] = {
@@ -28,7 +28,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'is_active': self.user.is_active,
         } 
        
-        return DeprecationWarning
+        return data
    
    
 class CustomTokenObtainPairView(TokenObtainPairView):

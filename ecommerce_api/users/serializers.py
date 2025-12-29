@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 
-User = get_user_model
+User = get_user_model()
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -71,7 +71,7 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate(self, attrs):
         """Validate password match"""
         if attrs['new_password'] != attrs['new_password2']:
-            raise serializers.ValidatorError(
+            raise serializers.ValidationError(
                 {"new_password": "password didn't match."}
             )
         return attrs

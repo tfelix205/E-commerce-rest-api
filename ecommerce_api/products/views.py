@@ -23,7 +23,7 @@ class CategoryListCreateView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
     
     def get_permissions(self):
-        if self.request.methos == 'POST':
+        if self.request.method == 'POST':
             return [IsAdmin()]
         return [permissions.AllowAny()]
     
@@ -45,12 +45,12 @@ class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.filter(is_active=True).select_related('category')
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category', 'is_featured']
-    serach_fields = ['name', 'description']
+    search_fields = ['name', 'description']
     ordering_fields = ['price', 'created_at', 'name']
     ordering = ['-created_at']
     
     def get_serializer_class(self):
-        if self.request.methos == 'POST':
+        if self.request.method == 'POST':
             return ProductCreateUpdateSerializer
         return ProductListSerializer
     
@@ -73,7 +73,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
             queryset = queryset.filter(price__lte=max_price)
             
         # Filter by stock availability
-        in_stock = self.request.query_paramas.get('in_stock')
+        in_stock = self.request.query_params.get('in_stock')
         if in_stock and in_stock.lower() == 'True':
             queryset = queryset.filter(stock__gt=0)
         return queryset
@@ -108,7 +108,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         
-        #Cache for 15 minutes
+        # Cache for 15 minutes
         cache.set(cache_key, serializer.data, 60 * 15)
         
         return Response(serializer.data)
@@ -129,7 +129,7 @@ class ProductSearchView(APIView):
             
         products = Product.objects.filter(
             Q(name__icontains=query) |
-            Q(description__icontins=query) |
+            Q(description__icontains=query) |
             Q(category__name__icontains=query),
             is_active=True
         ).select_related('category')[:20]
@@ -190,7 +190,7 @@ class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer
     
     def get_permissions(self):
-        if self.rquest.method in ['PUT', 'PATCH', 'DELETE']:
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
             return [permissions.IsAuthenticated()]
         return [permissions.AllowAny()]
     

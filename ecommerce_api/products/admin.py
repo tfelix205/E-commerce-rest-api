@@ -9,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'is_active', 'created_at')
     list_filter = ('is_active', 'created_at')
     search_fields = ('name', 'description')
-    prepopulatef_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
     
     
@@ -26,7 +26,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'stock_status', 'is_active', 'is_featured', 'created_at')
     list_filter = ('category', 'is_active', 'is_featured', 'created_at')
     search_fields = ('name', 'description')
-    prepopulate_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name',)}
     list_editable = ('price', 'stock', 'is_active', 'is_featured')
     inlines = [ProductImageInline]
     ordering = ('-created_at',)

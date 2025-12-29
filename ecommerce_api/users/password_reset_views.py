@@ -29,7 +29,7 @@ class RequestPasswordResetView(APIView):
                 {'message': 'Password reset email has been sent'},
                 status=status.HTTP_200_OK
             )
-        except User.DdoesNotExist:
+        except User.DoesNotExist:
             # Don't reveal if email exists or not for security
             return Response(
                 {'message': 'If an account exists with this email, a password reset link has been sent'},

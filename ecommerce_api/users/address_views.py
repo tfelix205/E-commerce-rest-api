@@ -16,7 +16,7 @@ class AddressListCreateView(generics.ListCreateAPIView):
             return AddressCreateUpdateSerializer
         return AddressSerializer
     
-    def perfom_create(self, serializer):
+    def perform_create(self, serializer):
         serializer.save(user=self.request.user)
         
         

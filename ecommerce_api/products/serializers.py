@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Category
-        fields = ('id', 'name', 'slug', 'description', 'image', 'is_active', 'product_count', 'created')
+        fields = ('id', 'name', 'slug', 'description', 'image', 'is_active', 'product_count', 'created_at')
         read_only_fields = ('id', 'slug', 'created_at', 'product_count')
     
     def get_product_count(self, obj):
@@ -81,7 +81,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'category', 'category_name',
             'price', 'stock', 'stock_status', 'in_stock', 'image', 'images',
-            'is_active', 'is_featured', 'average_rating', 'review_count', 'reviews'
+            'is_active', 'is_featured', 'average_rating', 'review_count', 'reviews',
             'created_at', 'updated_at'
         )
         read_only_fields = ('id', 'slug', 'stock_status', 'in_stock', 'created_at', 'updated_at')
@@ -98,7 +98,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     
 class ProductCreateUpdateSerializer(serializers.ModelSerializer):
     """Serializer for creating/updating product"""
-    class Meata:
+    class Meta:
         model = Product
         fields = (
             'id', 'name', 'description', 'category', 'price',
@@ -108,7 +108,7 @@ class ProductCreateUpdateSerializer(serializers.ModelSerializer):
         
     def validate_price(self, value):
         if value <= 0:
-            raise serializers.ValitionError("Price must be greater than 0")
+            raise serializers.ValidationError("Price must be greater than 0")
         return value
     
     def validate_stock(self, value):

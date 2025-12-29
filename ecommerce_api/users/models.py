@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def creat_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         """Create and return a superuser"""
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELD = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     class Meta:
         db_table = 'users'
