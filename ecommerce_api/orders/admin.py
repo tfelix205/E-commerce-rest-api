@@ -134,7 +134,7 @@ class PaymentAdmin(admin.ModelAdmin):
     list_display = (
         'order', 'payment_method', 'status_badge', 'amount', 'transaction_id', 'created_at'
     )
-    list_filter = ('paymnet_method', 'status', 'created_at')
+    list_filter = ('payment_method', 'status', 'created_at')
     search_fields = (
         'order__order_number', 'transaction_id', 'payment_intent_id'
     )
